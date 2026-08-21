@@ -1,51 +1,47 @@
-// Mobile Menu Toggle + Hamburger Crossfade
-const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+// Navbar scroll effect
+const navbar = document.getElementById("navbar");
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    navbar.classList.add("shadow-lg", "bg-slate-900/90");
+  } else {
+    navbar.classList.remove("shadow-lg", "bg-slate-900/90");
+  }
+});
+
+// Mobile Menu Toggle with Grid Animation
+const menuBtn = document.getElementById("menu-btn");
 const mobileMenu = document.getElementById("mobile-menu");
 const hamburgerIcon = document.getElementById("hamburger-icon");
 const closeIcon = document.getElementById("close-icon");
-
 let isOpen = false;
 
-mobileMenuBtn.addEventListener("click", () => {
+menuBtn.addEventListener("click", () => {
   isOpen = !isOpen;
 
-  // Toggle menu visibility (slide down effect)
-  mobileMenu.classList.toggle("hidden");
-
-  // Crossfade icons
+  // Smooth slide down/up using grid rows
   if (isOpen) {
-    // Show X, hide Hamburger
+    mobileMenu.classList.add("open");
     closeIcon.classList.remove("opacity-0");
     hamburgerIcon.classList.add("opacity-0");
   } else {
-    // Show Hamburger, hide X
+    mobileMenu.classList.remove("open");
     closeIcon.classList.add("opacity-0");
     hamburgerIcon.classList.remove("opacity-0");
   }
 });
 
-// Smooth scroll for anchor links + Close menu after click
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-
-      // If mobile menu is open, close it and reset icon
-      if (isOpen) {
-        isOpen = false;
-        mobileMenu.classList.add("hidden");
-        closeIcon.classList.add("opacity-0");
-        hamburgerIcon.classList.remove("opacity-0");
-      }
-    }
+// Close mobile menu on link click
+document.querySelectorAll("#mobile-menu a").forEach((link) => {
+  link.addEventListener("click", () => {
+    isOpen = false;
+    mobileMenu.classList.remove("open");
+    closeIcon.classList.add("opacity-0");
+    hamburgerIcon.classList.remove("opacity-0");
   });
 });
 
-// Scroll Reveal Animations (Intersection Observer)
+// Scroll Reveal Animations
 const revealElements = document.querySelectorAll(".reveal");
-
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -55,9 +51,8 @@ const observer = new IntersectionObserver(
     });
   },
   {
-    threshold: 0.15, // Trigger when 15% of the element is visible
-    rootMargin: "0px 0px -50px 0px", // Small bottom offset for better feel
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
   },
 );
-
 revealElements.forEach((el) => observer.observe(el));
