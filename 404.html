@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              slate: {
+                950: "#020617",
+                900: "#0f172a",
+                800: "#1e293b",
+                700: "#334155",
+              },
+              cyan: {
+                600: "#0891b2",
+                500: "#06b6d4",
+                400: "#22d3ee",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #020617;
+        color: #e2e8f0;
+        font-family: "Inter", sans-serif;
+      }
+
+      /* Background Glow (Matches the main site) */
+      .bg-glow {
+        position: fixed;
+        top: -20%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(34, 211, 238, 0.15) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+        z-index: 0;
+        animation: pulse-glow 8s infinite alternate;
+      }
+      @keyframes pulse-glow {
+        0% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        100% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+      }
+
+      /* Fade-Up Load Animation (Matches the Hero Anim) */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 0.8s ease-out forwards;
+      }
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased overflow-hidden">
+    <!-- Background Glow -->
+    <div class="bg-glow"></div>
+
+    <!-- Centered 404 Content -->
+    <div
+      class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 text-center"
+    >
+      <div class="fade-up">
+        <h1 class="text-9xl font-extrabold text-cyan-400 tracking-tight">
+          404
+        </h1>
+        <p class="text-2xl font-semibold text-white mt-6">Page not found</p>
+        <p class="text-slate-400 text-lg mt-2 mb-8">
+          The page you are looking for doesn't exist or has been moved.
+        </p>
+
+        <a
+          href="/"
+          class="inline-block px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-lg transition-colors shadow-lg shadow-cyan-600/20"
+        >
+          Return to home page
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
