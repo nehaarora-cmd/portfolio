@@ -13,7 +13,7 @@ module.exports = {
         cyan: { 600: "#0891b2", 500: "#06b6d4", 400: "#22d3ee" },
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Inter Variable", "system-ui", "sans-serif"],
       },
     },
   },
